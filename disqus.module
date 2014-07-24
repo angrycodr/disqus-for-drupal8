@@ -327,6 +327,26 @@ function theme_disqus_noscript($variables = array()) {
 }
 
 /**
+ * Implements hook_libraries_info().
+ */
+function disqus_libraries_info() {
+  $libraries['disqusapi'] = array(
+    'name' => 'Disqus PHP API',
+    'vendor url' => 'https://github.com/disqus/disqus-php',
+    'download url' => 'https://github.com/disqus/disqus-php',
+    'version arguments' => array(
+      'file' => 'disqusapi.php',
+      'pattern' => '@version\s+([0-9a-zA-Z\.-]+)@',
+      'lines' => 20,
+    ),
+    'files' => array(
+      'php' => array('disqusapi.php'),
+    ),
+  );
+  return $libraries;
+}
+
+/**
  * Creates an instance of the Disqus PHP API.
  *
  * @return
