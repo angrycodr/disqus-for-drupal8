@@ -290,39 +290,12 @@ function disqus_views_data_alter(&$data) {
 }
 
 /**
- * Implements hook_theme().
- */
-function disqus_theme() {
-  return array(
-    'disqus_noscript' => array(
-      'variables' => array('disqus' => NULL),
-    ),
-  );
-}
-
-/**
  * Prepares the noscript tag which is used when JavaScript is not available.
- *
- * @param $variables
- *   An array containing a "disqus" array, containing the following items:
- *     - "domain": The domain associated with this Disqus account.
- *     - "title": The title of the thread.
- *     - "developer": Whether or not testing is enabled.
- *     - "url": The disqus_url variable (http://disqus.com/docs/help/#faq-16).
  */
-function theme_disqus_noscript($variables = array()) {
-  $disqus = $variables['disqus'];
-  
+function theme_disqus_noscript() {
   $return = array(
-    '#markup' => '<noscript><p>' . l(t('View the discussion thread.'), 'http://' . $disqus['domain'] . '.disqus.com/?url=' . urlencode($disqus['url'])) . '</p></noscript>',
-    '#attached' => array(
-      'js' => array(
-        drupal_get_path('module', 'disqus') . '/disqus.js',
-        array('type' => 'setting', 'data' => array('disqus' => $disqus))
-      )
-    )
+    '#markup' => '<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>', 
   );
-
   return drupal_render($return);
 }
 
